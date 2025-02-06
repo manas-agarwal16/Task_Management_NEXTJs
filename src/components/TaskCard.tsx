@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-
 interface Task {
   _id: string;
   title: string;
@@ -19,25 +17,14 @@ const TaskCard = ({
   onUpdate: (_id: string, isCompleted: boolean) => void;
   onDelete: (_id: string) => void;
 }) => {
-  const [loading, setLoading] = useState(false);
-  const [showFullTask, setShowFullTask] = useState(false);
-
-  // const toggleCompletion = async (_id: string, isCompleted: boolean) => {
-  //   setLoading(true);
-  //   await fetch(`/api/tasks/${email}`, {
-  //     method: "PUT",
-  //     body: JSON.stringify({ id: task._id, isCompleted: !task.isCompleted }),
-  //     headers: { "Content-Type": "application/json" },
-  //   });
-  //   setLoading(false);
-  //   onUpdate(_id, isCompleted);
-  // };
 
   return (
     <>
-      <div className="p-4 cursor-pointer border rounded-lg shadow-md w-80 h-40 bg-gray-700">
-        <h3 className="text-xl font-bold">{task.title}</h3>
-        <p className="truncate">{task.description}</p>
+      <div className="p-4 border rounded-lg shadow-md w-80 h-52 bg-gray-800">
+        <h3 className="text-xl font-semibold mb-3 italic text-yellow-200">
+          {task.title}
+        </h3>
+        <textarea readOnly className="w-full bg-gray-800 resize-none focus:outline-none border-none" name="" value={task.description} id=""></textarea>
         <p className="text-gray-500 text-sm">
           Due: {new Date(task.dueDate).toDateString()}
         </p>
@@ -46,11 +33,7 @@ const TaskCard = ({
             onClick={() => onUpdate(task._id, task.isCompleted)}
             className="px-3 py-1 text-white bg-blue-600 rounded"
           >
-            {loading
-              ? "Updating..."
-              : task.isCompleted
-              ? "Mark Incomplete"
-              : "Mark Complete"}
+            {task.isCompleted ? "Mark Incomplete" : "Mark Complete"}
           </button>
           <button
             onClick={() => onDelete(task._id)}

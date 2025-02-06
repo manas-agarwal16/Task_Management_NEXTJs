@@ -30,11 +30,18 @@ export async function POST(req: Request) {
   await connectDB();
   try {
     const { title, description, dueDate, email } = await req.json();
-    console.log("title : ", title);
+
     if(!title || !description || !dueDate || !email) {
       return NextResponse.json({ success: false, error: "Title, Description and Due Date are required" }, { status: 400 });
     }
+
+    const taskAlreadyExists = await Task.findOne({ title, email });
+    if (taskAlreadyExists) {
+      return NextResponse.json({ success: false, error: "Task with this title already exists!!!" }, { status: 400 });
+    }
+
     const newTask = await Task.create({ title, description, dueDate, isCompleted: false , email});
+    
     return NextResponse.json({ success: true, task: newTask });
   } catch (error) {
     console.log("Error creating task : ", error);
