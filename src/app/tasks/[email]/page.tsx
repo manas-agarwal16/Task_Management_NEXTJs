@@ -104,7 +104,7 @@ export default function TaskPage({
         <div className="flex flex-col">
           <button
             onClick={() => setTaskForm(true)}
-            className="bg-blue-500 hover:bg-blue-600 transition text-white font-semibold px-4 py-2 w-52 border border-transparent rounded-lg m-2"
+            className="bg-blue-500 hover:bg-blue-600 transition text-white font-semibold px-4 py-2 w-52 border border-transparent rounded-lg m-2 self-center md:self-end md:mr-24 lg:mr-52"
           >
             Create Task +
           </button>
@@ -185,6 +185,10 @@ export default function TaskPage({
               </form>
             </>
           )}
+          {tasks.length === 0 && !loading && 
+          <div className="flex items-center justify-center h-96">
+            <h1 className="text-2xl text-gray-400">Add a task to get started</h1>
+          </div>}
           <ul
             className={`${
               loading ? "opacity-5" : ""
