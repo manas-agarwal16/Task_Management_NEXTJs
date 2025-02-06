@@ -96,17 +96,19 @@ export default function TaskPage({
   return (
     <>
       {loading && <Loading />}
-      <main className={`h-screen border border-black relative`}>
-        <h1 className="text-3xl w-full text-center font-semibold my-4">
+      <main className={`min-h-screen border border-black relative`}>
+        <h1 className="text-4xl md:text-5xl font-extrabold text-center my-8 bg-gradient-to-r from-blue-400 to-indigo-600 text-transparent bg-clip-text drop-shadow-lg">
           Task Management
         </h1>
+
         <div className="flex flex-col">
           <button
             onClick={() => setTaskForm(true)}
-            className="bg-blue-500 px-4 py-2 w-52 border rounded-lg m-2"
+            className="bg-blue-500 hover:bg-blue-600 transition text-white font-semibold px-4 py-2 w-52 border border-transparent rounded-lg m-2"
           >
-            Creat Task +
+            Create Task +
           </button>
+
           {taskForm && (
             <>
               {/* Background blur */}
@@ -135,6 +137,7 @@ export default function TaskPage({
                   <Input
                     type="text"
                     id="title"
+                    maxLength={25}
                     className="mt-1 px-3 py-2 w-full border border-gray-300 rounded-lg bg-gray-800 text-gray-200"
                     placeholder="Enter task title"
                     required
