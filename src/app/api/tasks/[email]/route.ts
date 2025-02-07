@@ -3,89 +3,243 @@ import connectDB from "../../../../lib/connectDB";
 import Task from "../../../../model/task.model";
 
 // GET: Fetch Tasks
-export async function GET(req: Request, { params }: { params: Promise<{ email: string }> }) {
+export async function GET(
+  req: Request,
+  { params }: { params: Promise<{ email: string }> }
+) {
   await connectDB();
   try {
     const resolvedParams = await params;
     const { email } = resolvedParams;
 
     console.log("email : ", email);
-    
+
     if (!email) {
-      return NextResponse.json({ success: false, error: "Email is required" }, { status: 400 });
+      return NextResponse.json(
+        { success: false, error: "Email is required" },
+        { status: 400 }
+      );
     }
 
-    const tasks = await Task.find({ email});
+    const tasks = await Task.find({ email });
     console.log("tasks : ", tasks);
     return NextResponse.json({ success: true, tasks }, { status: 200 });
   } catch (error) {
     console.error("Error fetching tasks:", error);
-    return NextResponse.json({ success: false, error: "Failed to fetch tasks" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "Failed to fetch tasks" },
+      { status: 500 }
+    );
   }
 }
 
 // POST: Create Task
-export async function POST(req: Request) {
-  console.log("POST request");
+export async function POST(
+  req: Request,
+  { params }: { params: Promise<{ email: string }> }
+) {
   await connectDB();
-  try {
-    const { title, description, dueDate, email } = await req.json();
+  const resolvedParams = await params;
+  let { email } = resolvedParams;
+  email = email.toLowerCase();
 
-    if(!title || !description || !dueDate || !email) {
-      return NextResponse.json({ success: false, error: "Title, Description and Due Date are required" }, { status: 400 });
+  try {
+    const { title, description, dueDate } = await req.json();
+
+    if (!title || !description || !dueDate || !email) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Title, Description and Due Date are required",
+        },
+        { status: 400 }
+      );
     }
 
     const taskAlreadyExists = await Task.findOne({ title, email });
     if (taskAlreadyExists) {
-      return NextResponse.json({ success: false, error: "Task with this title already exists!!!" }, { status: 400 });
+      return NextResponse.json(
+        { success: false, error: "Task with this title already exists!!!" },
+        { status: 400 }
+      );
     }
 
-    const newTask = await Task.create({ title, description, dueDate, isCompleted: false , email});
-    
+    const newTask = await Task.create({
+      title,
+      description,
+      dueDate,
+      isCompleted: false,
+      email,
+    });
+
     return NextResponse.json({ success: true, task: newTask });
   } catch (error) {
     console.log("Error creating task : ", error);
-    return NextResponse.json({ success: false, error: "Failed to create task" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "Failed to create task" },
+      { status: 500 }
+    );
   }
 }
 
-// PUT: Update Task
-export async function PUT(req: Request) {
-  console.log("PUT request");
+// PUT: Update Task Details
+export async function PUT(
+  req: Request,
+  { params }: { params: Promise<{ email: string }> }
+) {
   await connectDB();
+  const resolvedParams = await params;
+  let { email } = resolvedParams;
+  email = email.toLowerCase();
+
   try {
-    const { _id, isCompleted } = await req.json();
-    console.log("id : ", _id);
-    console.log("isCompleted : ", isCompleted);
-    
-    if (!_id || isCompleted === undefined || isCompleted === null) {
-      console.log("Task ID and isCompleted are required");
-      return NextResponse.json({ success: false, error: "Task ID and isCompleted are required" }, { status: 400 });
+    const { _id, title, description, dueDate } = await req.json();
+    if (!_id || !title || !description || !dueDate) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Task ID, Title, Description and Due Date are required",
+        },
+        { status: 400 }
+      );
     }
 
-    console.log('here');
+    const task = await Task.findById(_id);
+    // Task not found
+    if (!task) {
+      return NextResponse.json(
+        { success: false, error: "Task not found" },
+        { status: 404 }
+      );
+    }
 
-    const updatedTask = await Task.findByIdAndUpdate(_id, { isCompleted: !isCompleted }, { new: true });
+    // Unauthorized request
+    if (task.email !== email) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
 
-    console.log("updatedTask : ", updatedTask);
+    // Update task
+    const updatedTask = await Task.findOneAndUpdate(
+      { _id, email },
+      { title, description, dueDate },
+      { new: true }
+    );
+
     return NextResponse.json({ success: true, task: updatedTask });
   } catch (error) {
     console.log("Error updating task : ", error);
-    return NextResponse.json({ success: false, error: "Failed to update task" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "Failed to update task" },
+      { status: 500 }
+    );
+  }
+}
+
+// PATCH: Update Task Status
+export async function PATCH(
+  req: Request,
+  { params }: { params: Promise<{ email: string }> }
+) {
+  await connectDB();
+
+  const resolvedParams = await params;
+  let { email } = resolvedParams;
+  email = email.toLowerCase();
+
+  try {
+    const { _id, isCompleted } = await req.json();
+
+    if (!_id || isCompleted === undefined || isCompleted === null) {
+      console.log("Task ID and isCompleted are required");
+      return NextResponse.json(
+        { success: false, error: "Task ID and isCompleted are required" },
+        { status: 400 }
+      );
+    }
+
+    const task = await Task.findById(_id);
+
+    // Task not found
+    if (!task) {
+      return NextResponse.json(
+        { success: false, error: "Task not found" },
+        { status: 404 }
+      );
+    }
+
+    // Unauthorized request
+    if (task.email !== email) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized Request" },
+        { status: 401 }
+      );
+    }
+
+    const updatedTask = await Task.findByIdAndUpdate(
+      _id,
+      { isCompleted: !isCompleted },
+      { new: true }
+    );
+
+    return NextResponse.json({ success: true, task: updatedTask });
+  } catch (error) {
+    console.log("Error updating task : ", error);
+    return NextResponse.json(
+      { success: false, error: "Failed to update task" },
+      { status: 500 }
+    );
   }
 }
 
 // DELETE: Remove Task
-export async function DELETE(req: Request) {
+export async function DELETE(
+  req: Request,
+  { params }: { params: Promise<{ email: string }> }
+) {
   await connectDB();
+  const resolvedParams = await params;
+  let { email } = resolvedParams;
+  email = email.toLowerCase();
+
   try {
     const { _id } = await req.json();
     if (!_id) {
-      return NextResponse.json({ success: false, error: "Task ID is required" }, { status: 400 });
+      return NextResponse.json(
+        { success: false, error: "Task ID is required" },
+        { status: 400 }
+      );
     }
+
+    const task = await Task.findById(_id);
+
+    // Task not found
+    if (!task) {
+      return NextResponse.json(
+        { success: false, error: "Task not found" },
+        { status: 404 }
+      );
+    }
+
+    // Unauthorized request
+    if (task.email !== email) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized Request" },
+        { status: 401 }
+      );
+    }
+
     await Task.findByIdAndDelete(_id);
-    return NextResponse.json({ success: true, message: "Task deleted successfully" });
+    return NextResponse.json({
+      success: true,
+      message: "Task deleted successfully",
+    });
   } catch (error) {
-    return NextResponse.json({ success: false, error: "Failed to delete task" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "Failed to delete task" },
+      { status: 500 }
+    );
   }
 }

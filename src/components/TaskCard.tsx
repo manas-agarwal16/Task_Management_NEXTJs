@@ -10,12 +10,12 @@ interface Task {
 
 const TaskCard = ({
   task,
-  onUpdate,
-  onDelete,
+  onUpdateTaskStatus,
+  onDeleteTask,
 }: {
   task: Task;
-  onUpdate: (_id: string, isCompleted: boolean) => void;
-  onDelete: (_id: string) => void;
+  onUpdateTaskStatus: (_id: string, isCompleted: boolean) => void;
+  onDeleteTask: (_id: string) => void;
 }) => {
 
   return (
@@ -28,13 +28,14 @@ const TaskCard = ({
         </p>
         <div className="flex justify-between">
           <button
-            onClick={() => onUpdate(task._id, task.isCompleted)}
-            className="px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 transition rounded"
+            onClick={() => onUpdateTaskStatus(task._id, task.isCompleted)}
+            className={`${task.isCompleted ? "text-green-500" : "text-yellow-500"} px-4 py-2 text-white bg-blue-700 hover:bg-blue-600 font-semibold transition rounded`}
           >
-            {task.isCompleted ? "Mark Incomplete" : "Mark Complete"}
+            {task.isCompleted ? "• Complete" : "• Pending"}
           </button>
+
           <button
-            onClick={() => onDelete(task._id)}
+            onClick={() => onDeleteTask(task._id)}
             className="px-4 py-2 text-white bg-red-600 hover:bg-red-700 transition rounded"
           >
             Delete

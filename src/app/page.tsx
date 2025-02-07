@@ -16,7 +16,7 @@ export default async function Home() {
 
   return (
     <>
-      <h1 className="text-4xl md:text-5xl font-extrabold text-center my-8 bg-gradient-to-r from-blue-400 to-indigo-600 text-transparent bg-clip-text drop-shadow-lg">
+      <h1 className="absolute text-4xl md:text-5xl font-extrabold text-center my-8 bg-gradient-to-r from-blue-400 w-full to-indigo-600 text-transparent bg-clip-text drop-shadow-lg">
         Task Management
       </h1>
       <main className="h-screen w-screen flex flex-col gap-4 justify-center items-center">
