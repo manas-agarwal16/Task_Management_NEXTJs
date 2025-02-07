@@ -25,10 +25,10 @@
 </div>
 
 ## Screenshots
-<table>
+<table align="center">
   <tr>
-    <td><img src="./public/taskmanagementhome.png" alt="Home" width="400"></td>
-    <td><img src="./public/taskmanagementtasks.png" alt="TasksPage" width="400"></td>
+    <td><img src="./public/taskmanagementhome.png" alt="Home" width="500"></td>
+    <td><img src="./public/taskmanagementtasks.png" alt="TasksPage" width="500"></td>
   </tr>
 </table>
 
