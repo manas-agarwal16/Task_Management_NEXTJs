@@ -1,9 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Task Management - Internship Accessment Project
 
-## Getting Started
+## Project Links
+**Website Link**: &nbsp;[https://task-management-next-js-phi.vercel.app](https://task-management-next-js-phi.vercel.app)
+</br>
+</br>
+**Github Repository**: &nbsp;[https://github.com/manas-agarwal16/Task_Management_NEXTJs]
+(https://github.com/manas-agarwal16/Task_Management_NEXTJs)
 
-First, run the development server:
+## Tech Stack
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+  &nbsp;&nbsp;&nbsp;
+  <img src="./public/next.svg" width="50" height="50" style="margin-right: 30px;" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://cdn-icons-png.flaticon.com/128/5968/5968381.png" width="50" height="50" style="margin-right: 30px;" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+  <img src="https://www.svgrepo.com/show/333609/tailwind-css.svg" width="50" height="50" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <img src="https://www.svgrepo.com/show/331488/mongodb.svg" width="50" height="50" />
+  
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+ <pre>NEXTJS    TypeScript    TailwindCSS    MongoDB</pre>
+</div>
 ```bash
 npm run dev
 # or
