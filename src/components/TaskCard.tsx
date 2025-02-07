@@ -39,7 +39,7 @@ const TaskCard = ({
           {/* Update Task Status */}
           <button
             onClick={() => onUpdateTaskStatus(task._id, task.isCompleted)}
-            className={`${task.isCompleted ? "text-green-500" : "text-yellow-500"} px-4 py-2 text-white bg-blue-700 hover:bg-blue-600 font-semibold transition rounded`}
+            className={`${task.isCompleted ? "text-green-400" : "text-yellow-500"} px-4 py-2 text-white bg-blue-500 font-semibold transition rounded`}
           >
             {task.isCompleted ? "• Complete" : "• Pending"}
           </button>

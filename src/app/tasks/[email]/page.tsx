@@ -11,6 +11,16 @@ interface Task {
   isCompleted: boolean;
 }
 
+interface TaskFormElements extends HTMLFormControlsCollection {
+  title: HTMLInputElement;
+  description: HTMLTextAreaElement;
+  dueDate: HTMLInputElement;
+}
+
+interface TaskFormElement extends HTMLFormElement {
+  readonly elements: TaskFormElements;
+}
+
 export default function TaskPage({
   params,
 }: {
@@ -50,13 +60,15 @@ export default function TaskPage({
   };
 
   {/* Updating task details */}
-  const updateTaskDetails = async (event: React.FormEvent) => {
+  const updateTaskDetails = async (event: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
+    const form = event.currentTarget as TaskFormElement;
+    const { title, description, dueDate }  = form.elements;
     const formData = {
       _id: editTaskId,
-      title: (event.target as any).title?.value,
-      description: (event.target as any).description?.value,
-      dueDate: (event.target as any).dueDate?.value,
+      title: title?.value,
+      description: description?.value,
+      dueDate: dueDate?.value,
     };
 
     await fetch(`/api/tasks/${email}`, {
@@ -64,6 +76,8 @@ export default function TaskPage({
       body: JSON.stringify(formData),
       headers: { "Content-Type": "application/json" },
     });
+    setEditTask(false);
+    setEditTaskId("");
     fetchTasks();
   };
 
@@ -79,14 +93,18 @@ export default function TaskPage({
   };
 
   {/* Creating a task */}
-  const createTask = async (event: React.FormEvent) => {
+  const createTask = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const form = event.currentTarget as TaskFormElement;
+
+    const { title, description, dueDate } = form.elements;
 
     // Form data
     const formData = {
-      title: (event.target as any).title.value,
-      description: (event.target as any).description.value,
-      dueDate: (event.target as any).dueDate.value,
+      title: title.value,
+      description: description.value,
+      dueDate: dueDate.value,
     };
 
     try {
@@ -101,13 +119,11 @@ export default function TaskPage({
         throw new Error(`Failed to upload task`);
       }
 
-      const data = await res.json();
-
-      (event.target as any).reset();
       setTaskForm(false);
       fetchTasks();
     } catch (error) {
       console.error("Error:", error);
+      throw new Error(`Failed to create task`);
     }
   };
 
