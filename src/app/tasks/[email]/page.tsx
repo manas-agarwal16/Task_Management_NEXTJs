@@ -160,7 +160,10 @@ export default function TaskPage({
                 <div className="relative mb-6">
                   <span
                     className="absolute text-gray-500 hover:text-gray-400 cursor-pointer top-0 right-0 text-2xl"
-                    onClick={() => setTaskForm(false)}
+                    onClick={() => {
+                      setEditTask(false);
+                      setEditTaskId("");
+                    }}
                   >
                     &times;
                   </span>
