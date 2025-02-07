@@ -9,7 +9,7 @@
 ## Tech Stack
 <div style="display: flex; flex-wrap: wrap; gap: 20px;">
   &nbsp;&nbsp;
-  <img src="./public/next.svg" width="50" height="50" style="margin-right: 30px;" />
+  <img src="./public/next.svg" width="100" height="100" style="margin-right: 30px;" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="https://cdn-icons-png.flaticon.com/128/5968/5968381.png" width="50" height="50" style="margin-right: 30px;" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
