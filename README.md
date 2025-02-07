@@ -27,8 +27,8 @@
 ## Screenshots
 <table>
   <tr>
-    <td><img src="./src/assets/registerSS.png" alt="Home" width="400"></td>
-    <td><img src="./src/assets/verifyOtpSS.png" alt="TasksPage" width="400"></td>
+    <td><img src="./public/taskmanagementhome.png" alt="Home" width="400"></td>
+    <td><img src="./public/taskmanagementtasks.png" alt="TasksPage" width="400"></td>
   </tr>
 </table>
 
