@@ -6,8 +6,8 @@ import { FaGithub } from "react-icons/fa";
 
 export default async function Home() {
   const session = await auth();
-  console.log("session : ", session);
 
+  // Redirecting user to tasks if logged in
   if (session && session?.user) {
     const user = session.user;
     console.log("User is logged in");
@@ -20,6 +20,8 @@ export default async function Home() {
         Task Management
       </h1>
       <main className="h-screen w-screen flex flex-col gap-4 justify-center items-center">
+        
+        {/* Google OAuth */}
         <form
           className="border border-blue-500 rounded-lg"
           action={async () => {
@@ -33,6 +35,7 @@ export default async function Home() {
           </button>
         </form>
 
+        {/* Github OAuth */}
         <form
           className="border rounded-lg"
           action={async () => {
@@ -45,6 +48,7 @@ export default async function Home() {
             <span className="">Sign in with Github</span>
           </button>
         </form>
+        
       </main>
     </>
   );

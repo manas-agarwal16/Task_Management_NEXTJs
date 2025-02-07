@@ -26,9 +26,7 @@ export default function TaskPage({
   const [loading, setLoading] = useState(true);
   const today = new Date().toISOString().split("T")[0];
 
-  {
-    /* Fetching tasks from the server */
-  }
+  {/* Fetching tasks from the server */}
   const fetchTasks = async () => {
     setLoading(true);
     const res = await fetch(`/api/tasks/${email}`);
