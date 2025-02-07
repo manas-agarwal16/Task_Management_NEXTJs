@@ -10,12 +10,12 @@
 <div style="display: flex; flex-wrap: wrap; gap: 20px;">
   &nbsp;&nbsp;&nbsp;
   <img src="https://www.svgrepo.com/show/354113/nextjs-icon.svg" width="50" height="50" style="margin-right: 30px;" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://cdn-icons-png.flaticon.com/128/5968/5968381.png" width="50" height="50" style="margin-right: 30px;" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://cdn-icons-png.flaticon.com/128/5968/5968381.png" width="50" height="50" style="margin-right: 30px;" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
   <img src="https://www.svgrepo.com/show/333609/tailwind-css.svg" width="50" height="50" />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
   <img src="https://www.svgrepo.com/show/331488/mongodb.svg" width="50" height="50" />
   
