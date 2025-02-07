@@ -118,7 +118,6 @@ export default function TaskPage({
       if (!res.ok) {
         throw new Error(`Failed to upload task`);
       }
-
       setTaskForm(false);
       fetchTasks();
     } catch (error) {
