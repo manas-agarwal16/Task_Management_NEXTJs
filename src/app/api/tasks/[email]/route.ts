@@ -12,8 +12,6 @@ export async function GET(
     const resolvedParams = await params;
     const { email } = resolvedParams;
 
-    console.log("email : ", email);
-
     if (!email) {
       return NextResponse.json(
         { success: false, error: "Email is required" },
@@ -22,7 +20,6 @@ export async function GET(
     }
 
     const tasks = await Task.find({ email });
-    console.log("tasks : ", tasks);
     return NextResponse.json({ success: true, tasks }, { status: 200 });
   } catch (error) {
     console.error("Error fetching tasks:", error);

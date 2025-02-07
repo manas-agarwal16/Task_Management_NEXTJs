@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, use } from "react";
+import { useEffect, useState, use , useCallback } from "react";
 import { TaskCard, Loading, Input } from "@/components";
 
 interface Task {
@@ -27,15 +27,16 @@ export default function TaskPage({
   const today = new Date().toISOString().split("T")[0];
 
   {/* Fetching tasks from the server */}
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     setLoading(true);
     const res = await fetch(`/api/tasks/${email}`);
+    if (!res.ok) {
+      throw new Error('Failed to fetch tasks');
+    }
     const data = await res.json();
-    console.log("fetched tasks : ", data);
-
     setTasks(data.tasks);
     setLoading(false);
-  };
+  }, [email]);
 
   {/* Updating task status : Complete / Incomplete */}
   const updateTaskStatus = async (_id: string, isCompleted: boolean) => {
@@ -112,7 +113,7 @@ export default function TaskPage({
 
   useEffect(() => {
     fetchTasks();
-  }, []);
+  },[fetchTasks]);
 
   return (
     <>
