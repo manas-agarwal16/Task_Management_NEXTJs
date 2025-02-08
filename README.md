@@ -52,15 +52,15 @@ To run the application on your localhost, you need to have node installed on you
    npm install
    ```
 4. Set up your environment variables
-  </br>
-  ```sh
-  AUTH_SECRET=""
-  AUTH_GITHUB_CLIENT_ID=""
-  AUTH_GITHUB_CLIENT_SECRET=""
-  AUTH_GOOGLE_CLIENT_ID=""
-  AUTH_GOOGLE_CLIENT_SECRET=""
-  MONGODB_URI=""
-  ```
+   </br>
+   ```sh
+   AUTH_SECRET=""
+   AUTH_GITHUB_CLIENT_ID=""
+   AUTH_GITHUB_CLIENT_SECRET=""
+   AUTH_GOOGLE_CLIENT_ID=""
+   AUTH_GOOGLE_CLIENT_SECRET=""
+   MONGODB_URI=""
+   ```
 5. Run the Application  
    </br>
    ```js
