@@ -55,12 +55,16 @@ To run the application on your localhost, you need to have node installed on you
   </br>
    ```sh
    AUTH_SECRET=""
+   ```
+   ```sh
    AUTH_GITHUB_CLIENT_ID=""
+   ```
+   ```sh
    AUTH_GITHUB_CLIENT_SECRET=""
+   ```
    AUTH_GOOGLE_CLIENT_ID=""
    AUTH_GOOGLE_CLIENT_SECRET=""
    MONGODB_URI=""
-   ```
 5. Run the Application  
    </br>
    ```js
