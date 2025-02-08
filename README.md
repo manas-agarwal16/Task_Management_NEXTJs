@@ -46,12 +46,22 @@ To run the application on your localhost, you need to have node installed on you
    ```sh
    cd  TASK_MANAGEMENT_NEXTJS
    ```
-3. Install NPM packages and set up your environment variables
+3. Install NPM packages
    </br>
    ```sh
    npm install
    ```
-4. Run the Application  
+4. Set up your environment variables
+  </br>
+   ```sh
+   AUTH_SECRET=""
+   AUTH_GITHUB_CLIENT_ID=""
+   AUTH_GITHUB_CLIENT_SECRET=""
+   AUTH_GOOGLE_CLIENT_ID=""
+   AUTH_GOOGLE_CLIENT_SECRET=""
+   MONGODB_URI=""
+   ```
+5. Run the Application  
    </br>
    ```js
    npm run dev
